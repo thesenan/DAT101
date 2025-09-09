@@ -41,7 +41,7 @@ printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-let USD1=76/8.6;
+let USD1=76/8.6; //converting 1 USD to NOK and calculating 
 let UTN=Math.round(USD1*54);
 let USD="54 USD";
 printOut(USD + " = " + UTN + " NOK og " + UTN + " NOK"+ " = "+ USD);
@@ -49,12 +49,25 @@ printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+let setning="Det er mye mellom himmel og jord som vi ikke forstår.";//Finding different information about the sentence
+let setMengd= setning.length;
+let set19= setning.charAt(19); 
+let setChar= setning.substring(35,43);
+let setJord= setning.indexOf("jord");
+printOut(setning+"<br>"+"Setningen har "+ setMengd+ " karakterer"+"<br>"+"Karakter nr 19 er: "+set19+ "<br>"+ "Karakterene fra 35 til 43 er: "+ setChar+"<br>"+'Ordet "jord" starter på plass: '+ setJord);
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+let femTree= (5>3);
+let sju7= (7>=7);
+let aB= ("a">"b");
+let oneA= ("1"<"a");
+let numAbcd= ("2500"<"abcd");
+let aThomas= ("arne"!="thomas");
+let sammenlign= (2===5);
+let sammenlign2= ("abcd">"bcd");
+printOut("5>3 er: "+femTree+"<br>7>=7 er: "+sju7+'<br>"a">"b" er: '+aB+'<br>"1"<"a" er: '+oneA+'<br>"2500"<"abcd" er: '+numAbcd+'<br>"arne" er ikke det samme som "thomas" er: '+aThomas+'<br>(2===5) === true er: '+sammenlign+'<br>("abcd">"bcd") === '+sammenlign2+' er: true');
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
