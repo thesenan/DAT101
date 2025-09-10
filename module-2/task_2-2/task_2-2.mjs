@@ -59,7 +59,7 @@ printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-let femTree= (5>3);
+let femTree= (5>3);//Comparing different values
 let sju7= (7>=7);
 let aB= ("a">"b");
 let oneA= ("1"<"a");
@@ -72,16 +72,27 @@ printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+let numChange1= "254";//Different strings to be converted to numbers
+let numChange2= "57.23";
+let numChange3= "25";
+
+printOut('"254" = '+numChange1+ '<br>"57.23" = '+numChange2+ '<br>"25 kroner" = '+numChange3);
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+let r= Math.random() * 360 + 1;//Generating a random number between 1 and 360
+r= Math.floor(r);
+printOut("Tilfeldig tall mellom 1 og 360: "+r);
 printOut(newLine);
 
 /* Task 10*/
 printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+let sporDay= 131; //Calculating days and weeks from 131 days
+let days=1;
+let weeks=1*7;
+let convWeeks= Math.floor(sporDay/weeks);
+let convDays= Math.floor(sporDay%weeks);
+printOut("131 dager er "+ convWeeks + " uker og "+ convDays + " dager");
 printOut(newLine);
