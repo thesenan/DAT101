@@ -9,34 +9,43 @@
     <div style="padding: 10px; min-width: 512px; border: darkblue thin solid; background-color: antiquewhite; font-family: 'Courier New', serif">
       <span id="txtOut"></span>
     </div>
-    <ol>
+      <ol>
       <li>Where should you use constants, and where should you use variables? Can they all be constants?</li>
       <p>
-				[Replace this with you answer]
+				[Du skal bruke en constant når veriden ikke skal endre seg. Man kan nesten si at det er en fakta. Vi vet at PI alltid er 3.14. Det vil si at vi er 100% sikre på PI endrer seg, og derfor legger vi inn const.
+        Variablene bruker vi når vi ikke er 100% sikre på om verdien vil vedvare. For eksempel setter vi variablen let fornvavn = "vidar", men siden vi kanskje tror at det er Jens som skulle vært der så har vi muligheten
+        til å endre vidar med jens akkurat når vi ønsker i koden.
 			</p>
       <li>How do parentheses affect the arithmetic outcome of an expression?</li>
       <p>
-				[Replace this with you answer]
+			  [Parantesene påvirker hvordan vi regner ut et regnestykke. (I følge folk som kommeterer mattestykker på Facebook så er ikke dette så enkelt)
+        Men ja.. 2 + 2 * 4 = 10 fordi vi regner ut 2 * 4 først, og så legger vi til 2. Så mattestykket ser egentlig slik ut: 2 + (2 * 4) = 10.
 			</p>
       <li>How do we limit floating-point numbers to a given number of decimals?</li>
       <p>
-				[Replace this with you answer]
+				[Nå går vi tilbake til PI som eksempel PI = 3.141592653589793. Dette er litt for mange deimaler for oss dødelige. Men for å unngå disse desimalene så kan vi bruke toFixed.
+        ToFixed gjør at vi kan bestemme antall desimaler. toFixed(2) gjør at vi bare ser de 2 første desimalene. Altså 3.14.] 
 			</p>
       <li>How can we compare two floating-point values to see if they are equal (is 12.199999 the same as 12.2)?</li>
       <p>
-				[Replace this with you answer]
+				[12.9999999 er 12.2 er ikke like. Men vi kan bruke === for så sjekke om de er like. Altså 12.1999999 === 12.2 vil returnere false.]
 			</p>
       <li>What do comparison operators return, and how can we check if they are FALSE or TRUE?</li>
       <p>
-				[Replace this with you answer]
+				[sammenligningsopperatører gir tilbake eller en boleran. Det vil si at den sier at der er sant eller usant (True and false).
+        Ofte bruker vi IF, ELSE IF og ELSE med boleran. For å sjekke om en sammenligningesoperatør fungerer så må denne konsollogges. Console.log()]
+        Da vil du få vite om du det er True eller False.
 			</p>
       <li>How does the Math.random() function work, and what can it be used for?</li>
       <p>
-				[Replace this with you answer]
+				[Math.random() fungerer slik at den den velger et desmial mellom 0 og 1. Dette fungerer veldig bra om du skal trekke et tilfeldig kort eller noe annet.
+        Man kan justere disse random tallene med andre funksjoner som math.floor. For å få 0 - 400, så må du benytte det av math.floor før du benytter deg av match random.
+        Da vil du kunne rulle fra 0, og for å komme opp til 400 må du gange med 400 +1. Ellers går den bare til 399.99999999999999999. Derfor er +1 viktig.]
 			</p>
       <li>What is modulus (%), and when do we need this operator in mathematical operations?</li>
       <p>
-				[Replace this with you answer]
+				[% forteller rett og slett hva som er igjen av et tall. La oss si at jeg har 5 Porcher, og jeg har 2 eksamenssensorer jeg trenger å få smisket litt med.]
+        Jeg gir 2 til den ene, og 2 til den andre. Da vil %-en si at det er en porche igjen. 5 % 2 = 1.
 			</p>
     </ol>
 		<script type="module" src="./task_2-2.mjs" defer></script>
