@@ -64,7 +64,7 @@ let sju7= (7>=7);
 let aB= ("a">"b");
 let oneA= ("1"<"a");
 let numAbcd= ("2500"<"abcd");
-let aThomas= ("arne"!="thomas");
+let aThomas= ("arne"!=="thomas");
 let sammenlign= (2===5);
 let sammenlign2= ("abcd">"bcd");
 printOut("5>3 er: "+femTree+"<br>7>=7 er: "+sju7+'<br>"a">"b" er: '+aB+'<br>"1"<"a" er: '+oneA+'<br>"2500"<"abcd" er: '+numAbcd+'<br>"arne" er ikke det samme som "thomas" er: '+aThomas+'<br>(2===5) === true er: '+sammenlign+'<br>("abcd">"bcd") === '+sammenlign2+' er: true');
