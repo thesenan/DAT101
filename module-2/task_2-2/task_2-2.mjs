@@ -92,7 +92,8 @@ printOut(newLine);
 printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 let sporDay= 131; //Calculating days and weeks from 131 days
-let weeks=1*7;
+let day=1;
+let weeks=day*7;
 let convWeeks= Math.floor(sporDay/weeks);
 let convDays= Math.floor(sporDay%weeks);
 printOut("131 dager er "+ convWeeks + " uker og "+ convDays + " dager");
