@@ -84,7 +84,7 @@ printOut(newLine);
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 let r= Math.random() * 360 + 1;//Generating a random number between 1 and 360
-r= Math.floor(r);
+r= Math.ceil(r);
 printOut("Tilfeldig tall mellom 1 og 360: "+r);
 printOut(newLine);
 
