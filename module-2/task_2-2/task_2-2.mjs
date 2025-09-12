@@ -73,9 +73,11 @@ printOut(newLine);
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 let numChange1= "254";//Different strings to be converted to numbers
+numChange1= Number(numChange1);
 let numChange2= "57.23";
-let numChange3= "25";
-
+numChange2= Number(numChange2);
+let numChange3= "25 kroner";
+numChange3= parseInt(numChange3);
 printOut('"254" = '+numChange1+ '<br>"57.23" = '+numChange2+ '<br>"25 kroner" = '+numChange3);
 printOut(newLine);
 
