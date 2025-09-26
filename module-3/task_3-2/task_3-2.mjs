@@ -54,18 +54,18 @@ printOut(newLine);
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 let txtPrintValue5= "";
-let isPrime= true;
-let pCheck2="";
 
-for(let count=2;count<200;count++){
-    pCheck2= count%2;
-    if (pCheck2===0){
-        isPrime=false;
+for (let i=1; i<200; i++){
+    let j= i-1;
+    let isPrime= true;
+    
+    while(j>1 && isPrime){
+        let rest= i%j;
+        isPrime= rest !=0;
+        j--;
     }
-    while(isPrime===true){
-        let guessPrime=count;
-        txtPrintValue5+=guessPrime.toString();
-        printOut(txtPrintValue5);
+    if(isPrime){
+        txtPrintValue5+= " "+i;
     }
 }
 
@@ -99,8 +99,6 @@ while(gRCount!==5){
     txtPrintValue8+=" "+gradeR.toString();
     gRCount++
 }
-
-
 
 printOut(txtPrintValue8);
 printOut(newLine);
