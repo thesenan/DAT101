@@ -91,13 +91,15 @@ printOut(newLine);
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 let txtPrintValue8="";
+let gradeR=Math.floor(Math.random()*126+1);
+let gRCount=0;
 
-for (let i=1;i<=5;i++){
-    while(i!==5){
+while(gRCount!==5){
     gradeR=Math.floor(Math.random()*126+1);
     txtPrintValue8+=" "+gradeR.toString();
+    gRCount++
 }
-}
+
 
 
 printOut(txtPrintValue8);
