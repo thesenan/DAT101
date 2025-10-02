@@ -53,12 +53,15 @@ printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+//Checking which numbers between 1-200 is a prime number. Using for and while loops.
+//For loop is counting up to 200. And the while loop is checking if the current number in the count is a prime.
+
 let txtPrintValue5= "";
 
 for (let i=1; i<200; i++){
     let j= i-1;
     let isPrime= true;
-    
+
     while(j>1 && isPrime){
         let rest= i%j;
         isPrime= rest !=0;
@@ -74,6 +77,9 @@ printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+//Using nested for loops to print out a table. Where both loops is counting to different numbers. 
+//And said number is used to determent the number of columns and rows for the table.
+
 const pRow=7;
 const pColum=9;
 let txtPrintValue6="";
@@ -90,16 +96,37 @@ printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+// For loop that picks a random number between 1 and 126. Checks percent of the number. Then runs it thru the different if and else loops. To determine the letter grade.
+ 
 let txtPrintValue8="";
 let gradeR=Math.floor(Math.random()*126+1);
-let gRCount=0;
+let percent=(gradeR/126)*100;
 
-while(gRCount!==5){
+for (let i=0; i<=5; i++){
     gradeR=Math.floor(Math.random()*126+1);
-    txtPrintValue8+=" "+gradeR.toString();
-    gRCount++
-}
+    percent= Math.floor((gradeR/126)*100);
+    if (percent>=89){
+        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter A";
+    }
+    else if (percent<=88 && percent>=77){
+        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter B";
+    }
+    else if (percent<=76 && percent>=65){
+        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter C";
+    }
+    else if (percent<=64 && percent>=53){
+        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter D";
+    }
+    else if (percent<=52 && percent>=41){
+        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter E";
+    }
+    else {
+        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter F";
+    }
+    txtPrintValue8+="<br>";
 
+
+}
 printOut(txtPrintValue8);
 printOut(newLine);
 
