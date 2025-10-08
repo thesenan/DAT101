@@ -17,7 +17,8 @@ printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-// To variables that generates a random number between 1 and 60. A while loop that compares the two variables until they are the same. The While loop printed every guess until the correct number is guessed.
+// To variables that generates a random number between 1 and 60. A while loop that compares the two variables until they are the same. 
+// The While loop printed every guess until the correct number is guessed.
 let txtPrintValue3= "";
 let guessNumberAns= Math.floor(Math.random()*60)+1;
 let guessNumberMachine= Math.floor(Math.random()*60)+1;
@@ -32,7 +33,10 @@ printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-// Similar to part 2.But whit larger range of numbers. The while loop has a counter that counts how many guesses the machine needs to find the correct number. And it measures the time it takes to find the corrects number.
+// Similar to part 2.But whit larger range of numbers. 
+// The while loop has a counter that counts how many guesses the machine needs to find the correct number. 
+// And it measures the time it takes to find the corrects number.
+
 const timeStart= Date.now();
 let txtPrintValue4= "";
 let guessCount=0;
@@ -71,7 +75,6 @@ for (let i=1; i<200; i++){
         txtPrintValue5+= " "+i;
     }
 }
-
 printOut(txtPrintValue5);
 printOut(newLine);
 
@@ -96,8 +99,9 @@ printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-// For loop that picks a random number between 1 and 126. Checks percent of the number. Then runs it thru the different if and else loops. To determine the letter grade.
- 
+// For loop that picks a random number between 1 and 126. Checks percent of the number. 
+// Then runs it thru the different if and else loops. To determine the letter grade.
+
 let txtPrintValue8="";
 let gradeR=Math.floor(Math.random()*126+1);
 let percent=(gradeR/126)*100;
@@ -124,29 +128,81 @@ for (let i=0; i<=5; i++){
         txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter F";
     }
     txtPrintValue8+="<br>";
-
-
 }
+
 printOut(txtPrintValue8);
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
-printOut(newLine);
+//Using a Do while loop to throw 6 dice to find different outcome
 
-printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
-printOut(newLine);
+let rollStraight=0;
+let roll3Pairs=0;
+let rollTower=0;
+let rollYahtzee=0;
+let diceAnswer1=false;
+let diceAnswer2=false;
+let diceAnswer3=false;
+let diceAnswer4=false;
 
-printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
-printOut(newLine);
+do{
+    let dice1=Math.floor(Math.random()*6+1);
+    let dice2=Math.floor(Math.random()*6+1);
+    let dice3=Math.floor(Math.random()*6+1);
+    let dice4=Math.floor(Math.random()*6+1);
+    let dice5=Math.floor(Math.random()*6+1);
+    let dice6=Math.floor(Math.random()*6+1);
 
-/* Task 10*/
-printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
+    let allDice=[dice1,dice2,dice3,dice4,dice5,dice6];
+    let counts = {};
+
+    for (let i = 0; i < allDice.length; i++) {
+        let num = allDice[i];
+        counts[num] = (counts[num] || 0) + 1;
+    }
+
+    let diceValues = Object.values(counts).sort((a, b) => b - a);
+    let uniqueDice = Object.keys(counts).map(Number).sort((a, b) => a - b);
+
+    //Straight
+    if (!diceAnswer1) {
+        rollStraight++;
+        let isStraight = uniqueDice.length === 6 && uniqueDice.every((v, i) => v === i + 1);
+        if (isStraight){
+            diceAnswer1 = true;
+        } 
+    }
+
+    //3 pairs
+    if (!diceAnswer2) {
+        roll3Pairs++;
+        let isThreePairs = diceValues.length === 3 && diceValues.every(v => v === 2);
+        if (isThreePairs){
+            diceAnswer2 = true;
+        } 
+    }
+
+    //Tower
+    if (!diceAnswer3) {
+        rollTower++;
+        let isTower = diceValues.includes(4) && diceValues.includes(2) && diceValues.length === 2;
+        if (isTower){
+            diceAnswer3 = true;
+        }
+    }
+
+    //Yahtzee
+    if (!diceAnswer4) {
+        rollYahtzee++;
+        if (diceValues.length === 1 && diceValues[0] === 6){
+            diceAnswer4 = true;
+        }
+    }
+}while(!(diceAnswer1&&diceAnswer2&&diceAnswer3&&diceAnswer4))
+
+printOut("Måtte kaste terningene: "+rollStraight+' ganger får å få en "Straight". ');
+printOut("Måtte kaste terningene: "+roll3Pairs+' ganger får å få "3 pairs". ');
+printOut("Måtte kaste terningene: "+rollTower+' ganger får å få en "Tower". ');
+printOut("Måtte kaste terningene: "+rollYahtzee+' ganger får å få en "Yahtzee". ');
 printOut(newLine);
