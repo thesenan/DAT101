@@ -75,7 +75,7 @@ for (let i=1; i<200; i++){
         txtPrintValue5+= " "+i;
     }
 }
-printOut(txtPrintValue5);
+printOut("Disse tallene er primtallene mellom 1-200: <br>"+txtPrintValue5);
 printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
@@ -107,102 +107,251 @@ let gradeR=Math.floor(Math.random()*126+1);
 let percent=(gradeR/126)*100;
 
 for (let i=0; i<=5; i++){
-    gradeR=Math.floor(Math.random()*126+1);
-    percent= Math.floor((gradeR/126)*100);
+    gradeR=Math.floor(Math.random()*236+1);
+    percent= Math.floor((gradeR/236)*100);
     if (percent>=89){
-        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter A";
+        txtPrintValue8+=" Ut av 236 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter A";
     }
     else if (percent<=88 && percent>=77){
-        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter B";
+        txtPrintValue8+=" Ut av 236 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter B";
     }
     else if (percent<=76 && percent>=65){
-        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter C";
+        txtPrintValue8+=" Ut av 236 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter C";
     }
     else if (percent<=64 && percent>=53){
-        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter D";
+        txtPrintValue8+=" Ut av 236 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter D";
     }
     else if (percent<=52 && percent>=41){
-        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter E";
+        txtPrintValue8+=" Ut av 236 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter E";
     }
     else {
-        txtPrintValue8+=" Ut av 126 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter F";
+        txtPrintValue8+=" Ut av 236 poeng så fikk eleven: "+gradeR.toString()+" , som tilsvarer: "+percent.toString()+ "% , og karakter F";
     }
     txtPrintValue8+="<br>";
 }
 
+let txtPrintValue11="";
+const student=5;
+let grade1=Math.round(Math.ceil(Math.random()*236)/236*100);
+let grade2=Math.round(Math.ceil(Math.random()*236)/236*100);
+let grade3=Math.round(Math.ceil(Math.random()*236)/236*100);
+let grade4=Math.round(Math.ceil(Math.random()*236)/236*100);
+let grade5=Math.round(Math.ceil(Math.random()*236)/236*100);
+
+if(grade1>=89){
+    txtPrintValue11+= "Student 1: "+grade1+ "% - A"+ "<br>";
+}
+else if (grade1>=77){
+    txtPrintValue11+= "Student 1: "+grade1+ "% - B"+ "<br>";
+}
+else if (grade1>=65){
+    txtPrintValue11+= "Student 1: "+grade1+ "% - C"+ "<br>";
+}
+else if (grade1>=53){
+    txtPrintValue11+= "Student 1: "+grade1+ "% - D"+ "<br>";
+}
+else if (grade1>=41){
+    txtPrintValue11+= "Student 1: "+grade1+ "% - E"+ "<br>";
+}
+else{
+    txtPrintValue11+= "Student 1: "+grade1+ "% - F"+ "<br>";
+}
+
+if(grade2>=89){
+    txtPrintValue11+= "Student 2: "+grade2+ "% - A"+ "<br>";
+}
+else if (grade2>=77){
+    txtPrintValue11+= "Student 2: "+grade2+ "% - B"+ "<br>";
+}
+else if (grade2>=65){
+    txtPrintValue11+= "Student 2: "+grade2+ "% - C"+ "<br>";
+}
+else if (grade2>=53){
+    txtPrintValue11+= "Student 2: "+grade2+ "% - D"+ "<br>";
+}
+else if (grade2>=41){
+    txtPrintValue11+= "Student 2: "+grade2+ "% - E"+ "<br>";
+}
+else{
+    txtPrintValue11+= "Student 2: "+grade2+ "% - F"+ "<br>";
+}
+
+if(grade3>=89){
+    txtPrintValue11+= "Student 3: "+grade3+ "% - A"+ "<br>";
+}
+else if (grade3>=77){
+    txtPrintValue11+= "Student 3: "+grade3+ "% - B"+ "<br>";
+}
+else if (grade3>=65){
+    txtPrintValue11+= "Student 3: "+grade3+ "% - C"+ "<br>";
+}
+else if (grade3>=53){
+    txtPrintValue11+= "Student 3: "+grade3+ "% - D"+ "<br>";
+}
+else if (grade3>=41){
+    txtPrintValue11+= "Student 3: "+grade3+ "% - E"+ "<br>";
+}
+else{
+    txtPrintValue11+= "Student 3: "+grade3+ "% - F"+ "<br>";
+}
+
+if(grade4>=89){
+    txtPrintValue11+= "Student 4: "+grade4+ "% - A"+ "<br>";
+}
+else if (grade4>=77){
+    txtPrintValue11+= "Student 4: "+grade4+ "% - B"+ "<br>";
+}
+else if (grade4>=65){
+    txtPrintValue11+= "Student 4: "+grade4+ "% - C"+ "<br>";
+}
+else if (grade4>=53){
+    txtPrintValue11+= "Student 4: "+grade4+ "% - D"+ "<br>";
+}
+else if (grade4>=41){
+    txtPrintValue11+= "Student 4: "+grade4+ "% - E"+ "<br>";
+}
+else{
+    txtPrintValue11+= "Student 4: "+grade4+ "% - F"+ "<br>";
+}
+
+if(grade5>=89){
+    txtPrintValue11+= "Student 5: "+grade5+ "% - A"+ "<br>";
+}
+else if (grade5>=77){
+    txtPrintValue11+= "Student 5: "+grade5+ "% - B"+ "<br>";
+}
+else if (grade5>=65){
+    txtPrintValue11+= "Student 5: "+grade5+ "% - C"+ "<br>";
+}
+else if (grade5>=53){
+    txtPrintValue11+= "Student 5: "+grade5+ "% - D"+ "<br>";
+}
+else if (grade5>=41){
+    txtPrintValue11+= "Student 5: "+grade5+ "% - E"+ "<br>";
+}
+else{
+    txtPrintValue11+= "Student 5: "+grade5+ "% - F"+ "<br>";
+}
+/*
+for(let i=0; i<student; i++){
+    let grade=0;
+    switch(i){
+        case 1:
+            grade = grade1;
+            break;
+        case 2:
+            grade = grade2;
+            break;
+        case 3:
+            grade = grade3;
+            break;
+        case 4:
+            grade = grade4;
+            break;
+        case 5:
+            grade = grade5;
+            break;   
+    }
+    let j=i-1;
+
+    do{
+        let gradeCompare= 0;
+
+        j--
+    }while(j>0);
+}
+*/
 printOut(txtPrintValue8);
+printOut(newLine);
+printOut(txtPrintValue11);
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-//Using a Do while loop to throw 6 dice to find different outcome
+//Creates a function that takes inn the dice throws and compares it, based on how many unique numbers determend by the number input.
+//A do while loop that throws 6 dices and puts it in a variable while converting it to string. Later uses the function in if loop.
+//to find the dice combination straight, three pairs, tower and yahtzee.
 
-let rollStraight=0;
-let roll3Pairs=0;
-let rollTower=0;
-let rollYahtzee=0;
-let diceAnswer1=false;
-let diceAnswer2=false;
-let diceAnswer3=false;
-let diceAnswer4=false;
+function matchNumber(aText, aNumber){
+  let count = 0;
+  for(let i = 0; i < aText.length; i++){
+    if(aText.charAt(i) === aNumber.toString()){
+      count++;
+    }
+  }
+  return count;
+}
+
+let fullStraight=false;
+let ThreePairs=false;
+let tower=false;
+let yahtzee=false;
+let straightCount=0;
+let ThreePairsCount=0;
+let towerCount=0;
+let yahtzeeCount=0;
+let txt1="";
+let txt2="";
+let txt3="";
+let txt4="";
 
 do{
-    let dice1=Math.floor(Math.random()*6+1);
-    let dice2=Math.floor(Math.random()*6+1);
-    let dice3=Math.floor(Math.random()*6+1);
-    let dice4=Math.floor(Math.random()*6+1);
-    let dice5=Math.floor(Math.random()*6+1);
-    let dice6=Math.floor(Math.random()*6+1);
+const d1= Math.ceil(Math.random()*6);
+const d2= Math.ceil(Math.random()*6);
+const d3= Math.ceil(Math.random()*6);
+const d4= Math.ceil(Math.random()*6);
+const d5= Math.ceil(Math.random()*6);
+const d6= Math.ceil(Math.random()*6);
+const t= d1.toString()+d2.toString()+d3.toString()+d4.toString()+d5.toString()+d6.toString();
 
-    let allDice=[dice1,dice2,dice3,dice4,dice5,dice6];
-    let counts = {};
-
-    for (let i = 0; i < allDice.length; i++) {
-        let num = allDice[i];
-        counts[num] = (counts[num] || 0) + 1;
-    }
-
-    let diceValues = Object.values(counts).sort((a, b) => b - a);
-    let uniqueDice = Object.keys(counts).map(Number).sort((a, b) => a - b);
-
-    //Straight
-    if (!diceAnswer1) {
-        rollStraight++;
-        let isStraight = uniqueDice.length === 6 && uniqueDice.every((v, i) => v === i + 1);
-        if (isStraight){
-            diceAnswer1 = true;
-        } 
-    }
-
-    //3 pairs
-    if (!diceAnswer2) {
-        roll3Pairs++;
-        let isThreePairs = diceValues.length === 3 && diceValues.every(v => v === 2);
-        if (isThreePairs){
-            diceAnswer2 = true;
-        } 
-    }
-
-    //Tower
-    if (!diceAnswer3) {
-        rollTower++;
-        let isTower = diceValues.includes(4) && diceValues.includes(2) && diceValues.length === 2;
-        if (isTower){
-            diceAnswer3 = true;
-        }
-    }
-
-    //Yahtzee
-    if (!diceAnswer4) {
-        rollYahtzee++;
-        if (diceValues.length === 1 && diceValues[0] === 6){
-            diceAnswer4 = true;
-        }
-    }
-}while(!(diceAnswer1&&diceAnswer2&&diceAnswer3&&diceAnswer4))
-
-printOut("Måtte kaste terningene: "+rollStraight+' ganger får å få en "Straight". ');
-printOut("Måtte kaste terningene: "+roll3Pairs+' ganger får å få "3 pairs". ');
-printOut("Måtte kaste terningene: "+rollTower+' ganger får å få en "Tower". ');
-printOut("Måtte kaste terningene: "+rollYahtzee+' ganger får å få en "Yahtzee". ');
+let c1= matchNumber(t, 1);
+let c2= matchNumber(t, 2);
+let c3= matchNumber(t, 3);
+let c4= matchNumber(t, 4);
+let c5= matchNumber(t, 5);
+let c6= matchNumber(t, 6);
+const t2= c1.toString() + c2.toString() + c3.toString() + c4.toString() + c5.toString() + c6.toString();
+const cm1= matchNumber(t2, 1);
+const cm6= matchNumber(t2, 6);
+const cm3= matchNumber(t2, 2);
+const cm4= matchNumber(t2, 4);
+const cm2= matchNumber(t2, 2);
+if(cm1===6&& !fullStraight){
+    fullStraight=true;
+    txt1="<br>Full straight: " +t+"<br>Counts: "+ t2;
+    //printOut("Full straight: " +t);
+    //printOut("Counts: "+ t2);
+}
+else if(!fullStraight){
+    straightCount++
+}
+if(cm6===1&& !yahtzee){
+    yahtzee=true;
+    txt2="<br>Yahtzee: "+ t+"<br>Counts: "+ t2;
+    //printOut("Yahtzee: "+ t);
+    //printOut("Counts: "+ t2);
+}
+else if(!yahtzee){
+    yahtzeeCount++
+}
+if (cm3===3&& !ThreePairs){
+    ThreePairs=true;
+    txt3="<br>3 pairs: "+ t+"<br>Counts: "+ t2;
+    //printOut("3 pairs: "+ t);
+    //printOut("Counts: "+ t2);
+}
+else if(!ThreePairs){
+    ThreePairsCount++
+}
+if (cm4===1&& cm2===1&& !tower){
+    tower=true;
+    txt4="<br>Tower: "+ t+"<br>Counts: "+ t2;
+    //printOut("Tower: "+ t);
+    //printOut("Counts: "+ t2);
+}
+else if(!tower){
+    towerCount++
+}
+}while(!(fullStraight&&yahtzee&&ThreePairs&&tower))
+printOut(txt1+"<br>Full Straight rolled amount: "+ straightCount+txt3+"<br>3 pairs rolled amount: "+ ThreePairsCount+ txt4+"<br>Tower rolled amount: "+ towerCount+ txt2+"<br>Yahtzee rolled amount: "+ yahtzeeCount)
 printOut(newLine);
