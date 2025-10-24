@@ -8,12 +8,27 @@ const AccountTypes= {
     Pension: "Pensjonskonto"
 };
 
+const CurrencyTypes = {
+  NOK: { value: 1.0000, name: "Norske kroner", denomination: "kr" },
+  EUR: { value: 0.0985, name: "Europeiske euro", denomination: "€" },
+  USD: { value: 0.1091, name: "United States dollar", denomination: "$" },
+  GBP: { value: 0.0847, name: "Pound sterling", denomination: "£" },
+  INR: { value: 7.8309, name: "Indiske rupee", denomination: "₹" },
+  AUD: { value: 0.1581, name: "Australske dollar", denomination: "A$" },
+  PHP: { value: 6.5189, name: "Filippinske peso", denomination: "₱" },
+  SEK: { value: 1.0580, name: "Svenske kroner", denomination: "kr" },
+  CAD: { value: 0.1435, name: "Canadiske dollar", denomination: "C$" },
+  THB: { value: 3.3289, name: "Thai baht", denomination: "฿" }
+};
+
 class TBankAccount{
     #type = 0;
     #balance= 0;
     #withdrawCount= 0;
+    #currency= null;
     constructor(aType){
         this.#type= aType;
+        this.#currency= CurrencyTypes.NOK;
     }
 
     toString(){
@@ -51,6 +66,13 @@ class TBankAccount{
         }
         this.#balance -= aAmount;
         printOut("Withdraw of "+ aAmount+ ", new balance is "+ this.#balance);
+    }
+
+    setCurrencyType(aType){
+        if(this.#currency === aType){
+            return;
+        }
+        printOut("The currency has changed from " + this.#currency.name + " to " + aType.name);
     }
 }
 
@@ -90,10 +112,12 @@ myAccount.withdraw(30);
 myAccount.withdraw(30);
 myAccount.setType(AccountTypes.Pension);
 myAccount.withdraw(30);
+
 printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+
 printOut("Replace this with you answer!");
 printOut(newLine);
 
