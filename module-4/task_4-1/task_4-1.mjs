@@ -5,7 +5,7 @@ const AccountTypes= {
     Normal: "Brukskonto",
     Saving: "Sparekonto",
     Credit: "Kredittkonto",
-    Pension: "Pensjonskonto"
+    Pensjon: "Pensjonskonto"
 };
 
 const CurrencyTypes = {
@@ -26,9 +26,14 @@ class TBankAccount{
     #balance= 0;
     #withdrawCount= 0;
     #currency= null;
+
     constructor(aType){
         this.#type= aType;
         this.#currency= CurrencyTypes.NOK;
+    }
+
+    #currencyConvert(aType){
+        return CurrencyTypes.NOK.value / this.#currency.value * aType.value;
     }
 
     toString(){
@@ -46,14 +51,17 @@ class TBankAccount{
         return this.#balance;
     }
 
-    deposit(aAmount){
+    deposit(aAmount, aCurrencyType = CurrencyTypes.NOK){
         this.#withdrawCount= 0;
+        const exchange = this.#currencyConvert(aCurrencyType);
+        aAmount = aAmount / exchange;
         this.#balance += aAmount;
-        printOut("Deposit of "+ aAmount+ ", new balance is "+ this.#balance);
+        const den= this.#currency.denomination;
+        printOut("Deposit of "+ aAmount+ den + ", new balance is "+ this.#balance);
     }
-    withdraw(aAmount){
+    withdraw(aAmount, aCurrencyType = CurrencyTypes.NOK){
         switch(this.#type){
-            case AccountTypes.Pension:
+            case AccountTypes.Pensjon:
                 printOut("You can not withdraw from "+ this.#type);
                 return;
             case AccountTypes.Saving:
@@ -65,7 +73,7 @@ class TBankAccount{
                 break;
         }
         this.#balance -= aAmount;
-        printOut("Withdraw of "+ aAmount+ ", new balance is "+ this.#balance);
+        printOut("Withdraw of "+ aAmount+ den +", new balance is "+ this.#balance + den);
     }
 
     setCurrencyType(aType){
@@ -73,6 +81,10 @@ class TBankAccount{
             return;
         }
         printOut("The currency has changed from " + this.#currency.name + " to " + aType.name);
+        this.#currency = aType;
+        const exchange = this.#currencyConvert(aType);
+        this.#balance *= exchange;
+        printOut("New balance is " + this.#balance.toFixed(2) + this.#currency.denomination);
     }
 }
 
@@ -110,20 +122,26 @@ myAccount.withdraw(30);
 myAccount.withdraw(30);
 myAccount.withdraw(30);
 myAccount.withdraw(30);
-myAccount.setType(AccountTypes.Pension);
+myAccount.setType(AccountTypes.Pensjon);
 myAccount.withdraw(30);
+myAccount.setType(AccountTypes.Normal);
+myAccount.withdraw(10);
 
 printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+myAccount.deposit(150);
 
-printOut("Replace this with you answer!");
+
 printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+myAccount.setCurrencyType(CurrencyTypes.SEK);
+myAccount.setCurrencyType(CurrencyTypes.USD);
+myAccount.setCurrencyType(CurrencyTypes.NOK);
+
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");

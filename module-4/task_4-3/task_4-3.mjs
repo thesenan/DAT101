@@ -54,8 +54,50 @@ const MovieGenre = [
 //--- Part 3 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
 
+const chkTask3 = document.getElementsByName("chkTask3");
+const cmbTask3CheckAnswer = document.getElementById("cmbTask3CheckAnswer");
+const txtTask3Output = document.getElementById("txtTask3Output");
+
+function cmbTask3CheckAnswerClick (){
+  txtTask3Output.innerHTML = "";
+
+  for (let i = 0; i < chkTask3.length; i++){
+    const chkBox = chkTask3[i];
+    const text = `chkTask3[${i}].checked = ${chkBox.checked}`;
+    txtTask3Output.innerHTML += text + "</br>";
+  }
+}
+cmbTask3CheckAnswer.addEventListener("click", cmbTask3CheckAnswerClick);
+
 //--- Part 4 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
+
+function rdbCarNameSelect(aEvent){
+  const txtTask4Output = document.getElementById("txtTask4Output");
+  txtTask4Output.innerHTML = `User selected car type number: ${aEvent.target.value}`;
+  
+}
+
+const divTask4Cars = document.getElementById("divTask4Cars");
+
+for (let i = 0; i < CarTypes.length; i++){
+
+  const car = CarTypes[i];
+  const inpRadio = document.createElement("input")
+  inpRadio.type = "radio";
+  inpRadio.name = "rdbCarName";
+  inpRadio.value = car.value;
+  inpRadio.id = "rbdCarName" + i.toString();
+  inpRadio.addEventListener("change", rdbCarNameSelect);
+
+  const lblCaption = document.createElement("label");
+  lblCaption.for = inpRadio.id;
+  lblCaption.appendChild(document.createTextNode(car.caption));
+  divTask4Cars.appendChild(inpRadio);
+  divTask4Cars.appendChild(lblCaption);
+  divTask4Cars.appendChild(document.createElement("br"));
+
+}
 
 //--- Part 5 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
