@@ -10,8 +10,15 @@
       <span id="txtOut" style="white-space: nowrap"></span>
     </div>
     <ol>
-      <li>[Write the question here, and copy this for more questions]</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <li>In part 1, is it possible to solve the problem using a single "for" loop?</li>
+      <p>Yes it is possible. Using two variables named i and j, where one counts up from 1 to 10 and the other counting down from 10 to 1. 
+      </p>
+      <li>In part 2, can we create what is known as an "infinite" loop within the condition of the "while" loop? Describe what would or would not be necessary to achieve this. Provide a thorough explanation of your answer.</li>
+      <p>It is possible to create an infinite loop with a "while" loop. An example of this would be a "while" loop that runs a random number generator that is guessing a number between 1 and 10, but the target number is set as 11. So as long as the condition for the loop to finish are not met, it will run forever or until the program crashes.  </p>
+      <li>Discuss briefly how quickly or slowly a computer might be able to compute this, considering the number of guesses and the time it takes. How does the program behave while it is guessing? Can the program perform other tasks concurrently?</li>
+      <p>The computer would be able to compute this very quickly, as modern computers can perform millions of operations per second. While the program is guessing, it will be stuck in a loop until it finds the correct number. The program cannot perform other tasks concurrently while it is guessing. Because JavaScript runs on a single thread, it cannot perform other tasks while it is guessing.</p>
+      <li>Explain the relationship between rows and columns in nested "for" loops. Can we, for instance, change the order, considering rows to be innermost or columns to be innermost, or does this not matter?</li>
+      <p>The relationship between rows and columns in nested "for" loops is that the inner loop iterates over the columns for each row. Changing the order of the loops would change the output pattern, but it does not alter how the loops function. </p>
     </ol>
     <script type="module" src="./task_3-2.mjs" defer></script>
   </body>
