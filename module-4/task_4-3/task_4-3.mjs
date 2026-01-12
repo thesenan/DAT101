@@ -102,8 +102,33 @@ for (let i = 0; i < CarTypes.length; i++){
 //--- Part 5 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
 
+const selectTask5Animals = document.getElementById("selectTask5Animals");
+const txtTask5Output = document.getElementById("txtTask5Output");
+
+function selectTask5AnimalsChange(){
+  const animalValue = selectTask5Animals.value;
+  txtTask5Output.innerHTML = ` User selected animal nr: ${animalValue}`;
+}
+selectTask5Animals.addEventListener("change", selectTask5AnimalsChange);
+
 //--- Part 6 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
+
+const selectTask6Girls = document.getElementById("selectTask6Girls");
+const txtTask6Output = document.getElementById("txtTask6Output");
+for (let i = 0; i < GirlsNames.length; i++){
+  const option = document.createElement("option");
+  option.value = i.toString();
+  option.appendChild(document.createTextNode(GirlsNames[i]));
+  selectTask6Girls.appendChild(option);
+}
+
+function selectGirlsChange(){
+  const value = parseInt(selectTask6Girls.value);
+  const name = GirlsNames[value];
+  txtTask6Output.innerHTML = `You selected: #${value}, ${name}`;
+}
+selectTask6Girls.addEventListener("change", selectGirlsChange);
 
 //--- Part 7 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
