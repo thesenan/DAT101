@@ -79,7 +79,31 @@ printOut(newLine);
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
-const tempTypes = {
+const kelvin = 1;
+//const fahrenheit = (kelvin - 273.15)*9/5+32;
+const celsius = kelvin - 273.15;
+
+function convertTemperature(aTemp, aTempTypes){
+
+    switch(aTempTypes){
+
+        case kelvin:
+            const tKelvin = aTemp;
+            const kFahrenheit = (tKelvin - 273.15)*9/5+32;
+            const kCelsius = tKelvin - 273.15;
+            printOut(`Converting Kelvin: ${tKelvin}<br>Celsius: ${kCelsius}<br>Fahrenheit: ${kFahrenheit}`);
+
+        case celsius:
+            const tCelsius = aTemp;
+            const cKelvin = tCelsius + 273.15;
+            const cFahrenheit = (tCelsius*9/5)+32;
+            printOut(`Converting Celsius: ${tCelsius}<br>Fahrenheit: ${cFahrenheit}<br>Kelvin: ${cKelvin}`);
+    }
+}
+
+convertTemperature(47, kelvin);
+
+/*const tempTypes = {
     kelvin: 1,
     celsius: 2,
     fahrenheit: 3
@@ -95,19 +119,19 @@ function convertTemperature(aTemp, aTempTypes){
             kelvin= aTemp;
             celsius= kelvin - 273.15;
             fahrenheit= (celsius * 9/5) + 32;
-            tempTypeName = "Kelvin";
+            printOut(`Temperature in Kelvin: ${kelvin}`);
             break;
         case tempTypes.celsius:
             celsius= aTemp;
             kelvin= celsius + 273.15;
             fahrenheit= (celsius * 9/5) + 32;
-            tempTypeName = "Celsius";
+            printOut(`Temperature in Celsius: ${celsius}`);
             break;
         case tempTypes.fahrenheit:
             fahrenheit= aTemp;
             celsius= (fahrenheit - 32) * 5/9;
             kelvin= celsius + 273.15;
-            tempTypeName = "Fahrenheit";
+            printOut(`Temperature in Fahrenheit: ${fahrenheit}`);
             break;
         }   
     }
@@ -115,7 +139,7 @@ function convertTemperature(aTemp, aTempTypes){
     convertTemperature(300, tempTypes.kelvin);
     convertTemperature(27, tempTypes.celsius);
     convertTemperature(80, tempTypes.fahrenheit);
-
+*/
 printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");

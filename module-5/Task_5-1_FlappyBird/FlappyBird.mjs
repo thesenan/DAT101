@@ -2,6 +2,9 @@
 // Import necessary modules
 import { TSpriteCanvas } from "libSprite";
 import { TBackground } from "./background.js";
+import { THero } from "./hero.js";
+import { TObstacle } from "./obstacle.js";
+
 //--------------- Objects and Variables ----------------------------------//
 const chkMuteSound = document.getElementById("chkMuteSound");
 const rbDayNight = document.getElementsByName("rbDayNight");
@@ -28,11 +31,42 @@ const SpriteInfoList = {
 
 const EGameStatus = { idle: 0 };
 const background = new TBackground(spcvs, SpriteInfoList);
+const hero = new THero(spcvs, SpriteInfoList.hero1);
+const obstacles = [];
 
 
 //--------------- Functions ----------------------------------------------//
+function spawnObstacle(){
+  const obstacle = new TObstacle(spcvs, SpriteInfoList.obstacle);
+  obstacles.push(obstacle);
+  const nextTime = Math.ceil(Math.random() * 3) + 1;
+  setTimeout(spawnObstacle, nextTime * 1000);
+}
+
+function animateGame(){
+  hero.animate();
+  background.animate();
+  let deleteObstacle = false;
+  for(let i = 0; i < obstacles.length; i++){
+    const obstacle = obstacles[i];
+    obstacle.animate();
+    if(obstacle.x < -50){
+      deleteObstacle = true;
+    }
+  }
+  if(deleteObstacle){
+    obstacles.splice(0,1);
+  }
+}
+
 function drawGame(){
-  background.draw();
+  background.drawBackground();
+  hero.draw();
+  for(let i = 0; i < obstacles.length; i++){
+    const obstacle = obstacles[i];
+    obstacle.draw();
+  }
+  background.drawGround();
 }
 
 function loadGame() {
@@ -44,6 +78,9 @@ function loadGame() {
   // Overload the spcvs draw function here!
   spcvs.onDraw = drawGame;
 
+  //Start animate engine
+  setInterval(animateGame, 10);
+  setTimeout(spawnObstacle, 1000);
 } // end of loadGame
 
 
@@ -51,6 +88,7 @@ function onKeyDown(aEvent) {
   switch (aEvent.code) {
     case "Space":
       console.log("Space key pressed, flap the hero!");
+      hero.flap();  
       break;
   }
 } // end of onKeyDown
