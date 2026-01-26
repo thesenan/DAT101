@@ -1,6 +1,6 @@
 "use strict";
 import { TSprite } from "libSprite";
-import { hero, EGameStatus } from "./FlappyBird.mjs";
+import { hero, EGameStatus, menu } from "./FlappyBird.mjs";
 //import { ground } from "./FlappyBird.mjs";
 
 const EasyFlyerGap = 150;
@@ -41,6 +41,10 @@ export class TObstacle{
     return this.#spDown.x;
   }
 
+  get width(){
+    return this.#spDown.width;
+  }
+  
   draw(){
     this.#spDown.draw();
     this.#spUp.draw();
@@ -56,7 +60,9 @@ export class TObstacle{
       console.log("crash");
       EGameStatus.state = EGameStatus.heroIsDead;
       hero.animationSpeed = 0;
+      menu.stopSound();
       hero.flap(); //Last flap of death!
+      hero.dead();
     }
   }
 
