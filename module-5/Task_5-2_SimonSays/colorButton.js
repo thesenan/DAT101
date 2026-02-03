@@ -2,6 +2,8 @@
 import { TPoint } from "lib2d";
 import { TSpriteButton } from "libSprite";
 import { EOctave, ENoteName, Notes, TSoundWave } from "libSound";
+import { testOfUserInput } from "./sequence.js";
+import { EGameStatusType } from "./SimonSays.mjs";
 
 export class TColorButton extends TSpriteButton{
   #dst;
@@ -44,6 +46,12 @@ export class TColorButton extends TSpriteButton{
     if(this.#sound){
       this.#sound.stop();
     }
+    
+    if(EGameStatusType.state === EGameStatusType.Gamer){
+      testOfUserInput(this);
+    }
+    
+    
   }
 
   createSound(aIndex){
@@ -52,13 +60,13 @@ export class TColorButton extends TSpriteButton{
         this.#sound = new TSoundWave(EOctave.Octave6, ENoteName.C);
         break;
       case 1:
-        this.#sound = new TSoundWave(EOctave.Octave6, ENoteName.D);
+        this.#sound = new TSoundWave(EOctave.Octave6, ENoteName.Gb);
         break;
       case 2:
         this.#sound = new TSoundWave(EOctave.Octave6, ENoteName.E);
         break;
       case 3:
-        this.#sound = new TSoundWave(EOctave.Octave6, ENoteName.F);
+        this.#sound = new TSoundWave(EOctave.Octave6, ENoteName.D);
         break;
     }
     
