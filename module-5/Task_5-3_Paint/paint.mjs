@@ -1,7 +1,7 @@
 "use strict";
 
 import { TMenu, EActionType, EColorType, EShapeType, EStrokeSizeType } from "./menu.js";
-import { } from "./shape.js";
+import { newDrawing, deleteShape, moveUp, moveDown } from "./shape.js";
 
 /*
 📝 TODO: Create a Shape System
@@ -71,18 +71,18 @@ You need to build this file with the following features:
 /**
  * 🎨 DRAWING SETTINGS OBJECT
  * This tracks what the user has currently selected in the toolbar
- * 
+ *
  * 📌 DEFAULT VALUES (what buttons start as "active"):
  *    • ShapeType: Line (vs Circle, Rectangle, Pen, Oval, Polygon)
  *    • FillColor: Black
  *    • StrokeColor: Black
  *    • StrokeSize: Thin
- * 
+ *
  * 💡 TIP FOR CUSTOMIZATION:
  *    Want different buttons to be active when the app starts?
  *    Just change these default values!
  *    Example: Change StrokeColor to EColorType.Red to highlight the Red color button
- * 
+ *
  * ✏️ During gameplay:
  *    When user clicks a menu button (e.g., "Circle"), this object gets updated
  *    So when drawing a new shape, the app knows which settings to use
@@ -99,12 +99,10 @@ export const newShapeType = { ShapeType: EShapeType.Line, FillColor: EColorType.
  */
 const menu = new TMenu(newShapeType);
 
-
-
 /**
  * 📢 MENU BUTTON HANDLER
  * This function runs when user clicks ANY button in the menu toolbar
- * 
+ *
  * 📦 The event.detail contains information about which button was clicked:
  *    {
  *      Action: { name: "New", value: 1 },
@@ -115,50 +113,55 @@ const menu = new TMenu(newShapeType);
  */
 function menuButtonClick(aEvent) {
   const envelope = aEvent.detail;
-  const actionKey = Object.keys(envelope)[0];        // 👉 Which category? (Action, StrokeColor, ShapeType, etc.)
-  const action = envelope[actionKey];                 // 👉 Get the full details of that button
-  const name = action.name;                          // 👉 Button nickname (e.g., "Black", "Line", "New")
-  const value = action.value;                        // 👉 Button value (e.g., "#000000", 1, "Thin")
-  
+  const actionKey = Object.keys(envelope)[0]; // 👉 Which category? (Action, StrokeColor, ShapeType, etc.)
+  const action = envelope[actionKey]; // 👉 Get the full details of that button
+  const name = action.name; // 👉 Button nickname (e.g., "Black", "Line", "New")
+  const value = action.value; // 👉 Button value (e.g., "#000000", 1, "Thin")
+
   // ✅ Update newShapeType based on the button clicked
   // Example: if StrokeColor button clicked → update newShapeType.StrokeColor
-  
+
   switch (actionKey) {
     case "Action":
       // 🎯 Action buttons (New, Eraser, Move Up, Move Down)
       switch (value) {
         case EActionType.New:
           console.log("✨ New button clicked → Clear the canvas!");
+          newDrawing();
           break;
         case EActionType.Eraser:
           console.log("🗑️  Eraser button clicked → Delete selected shape");
+          deleteShape();
           break;
         case EActionType.MoveUp:
           console.log("⬆️  Move Up button clicked → Bring selected shape to front");
+          moveUp();
           break;
         case EActionType.MoveDown:
           console.log("⬇️  Move Down button clicked → Send selected shape to back");
+          moveDown();
           break;
       }
       break;
     case "StrokeColor":
       console.log(`🎨 Stroke Color changed to ${name} (${value})`);
-      newShapeType.StrokeColor = value;  // ← Update the setting
+      newShapeType.StrokeColor = value; // ← Update the setting
       break;
     case "FillColor":
       console.log(`🪣 Fill Color changed to ${name} (${value})`);
-      newShapeType.FillColor = value;    // ← Update the setting
+      newShapeType.FillColor = value; // ← Update the setting
       break;
     case "ShapeType":
       console.log(`📐 Shape Type changed to ${name} (${value})`);
-      newShapeType.ShapeType = value;    // ← Update the setting
+      newShapeType.ShapeType = value; // ← Update the setting
       break;
     case "StrokeSize":
       console.log(`📏 Stroke Size changed to ${name} (${value})`);
-      newShapeType.StrokeSize = value;   // ← Update the setting
-      break; 
+      newShapeType.StrokeSize = value; // ← Update the setting
+      break;
   }
 }
 
 // 🔗 Listen for menu button clicks
 menu.addEventListener("menuButtonClick", menuButtonClick);
+newDrawing();
