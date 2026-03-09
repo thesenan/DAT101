@@ -3,10 +3,15 @@ import { TSpriteButton } from "libSprite";
 import { TPoint } from "lib2d";
 import { gameLevel } from "./Minesweeper.mjs";
 
+const MineInfoColors = ["blue", "green", "red", "darkblue", "brown", "cyan", "black", "grey"];
 let tiles = [];
+let ctx = document.getElementById("cvs").getContext("2d");
 
 export class TTile extends TSpriteButton {
   #mine;
+  #col;
+  #row;
+  #neighbors;
 
   constructor(aSpcvs, aSPI, aCol, aRow) {
     const pos = new TPoint(20, 133);
@@ -14,6 +19,10 @@ export class TTile extends TSpriteButton {
     pos.y += aSPI.height * aRow;
     super(aSpcvs, aSPI, pos.x, pos.y);
     this.#mine = false;
+    this.#col = aCol;
+    this.#row = aRow;
+    this.#neighbors = null;
+    this.mineInfo = 0;
   }
 
   get isMine() {
@@ -22,10 +31,58 @@ export class TTile extends TSpriteButton {
 
   set isMine(aValue) {
     this.#mine = aValue;
+    this.mineInfo = 0;
+    this.#getNeighbors();
+    for (let i = 0; i < this.#neighbors.length; i++) {
+      const tile = this.#neighbors[i];
+      if (tile.isMine === false) {
+        tile.mineInfo++;
+      }
+    }
   }
 
   get open() {
-    return this.index === 2;
+    return this.index === 2 || this.index === 5;
+  }
+
+  draw() {
+    super.draw();
+    if (this.open && this.mineInfo) {
+      ctx.font = "48px Consolas";
+      ctx.fillStyle = MineInfoColors[this.mineInfo - 1];
+      ctx.fillText(this.mineInfo, this.x + 13, this.y + 40);
+    }
+  }
+
+  #getNeighbors() {
+    if (this.#neighbors !== null) {
+      return;
+    }
+    let colFrom = this.#col - 1;
+    let colTo = this.#col + 1;
+    let rowFrom = this.#row - 1;
+    let rowTo = this.#row + 1;
+    if (colFrom < 0) {
+      colFrom = 0;
+    }
+    if (rowFrom < 0) {
+      rowFrom = 0;
+    }
+    if (colTo >= gameLevel.Tiles.Col) {
+      colTo = gameLevel.Tiles.Col - 1;
+    }
+    if (rowTo >= gameLevel.Tiles.Row) {
+      rowTo = gameLevel.Tiles.Row - 1;
+    }
+    this.#neighbors = [];
+    for (let colIndex = colFrom; colIndex <= colTo; colIndex++) {
+      for (let rowIndex = rowFrom; rowIndex <= rowTo; rowIndex++) {
+        const tile = tiles[colIndex][rowIndex];
+        if (this !== tile) {
+          this.#neighbors.push(tile);
+        }
+      }
+    }
   }
 
   //Override function
@@ -36,7 +93,7 @@ export class TTile extends TSpriteButton {
   }
 
   onMouseUp(aEvent) {
-    this.index = 2;
+    this.open = true;
     super.onMouseUp(aEvent);
   }
 
@@ -46,12 +103,29 @@ export class TTile extends TSpriteButton {
     }
     super.onMouseLeave(aEvent);
   }
+
+  set open(_aValue) {
+    if (this.isMine) {
+      this.index = 5;
+    } else {
+      this.index = 2;
+    }
+    if (this.mineInfo === 0) {
+      this.#getNeighbors();
+      for (let i = 0; i < this.#neighbors.length; i++) {
+        const tile = this.#neighbors[i];
+        if (tile.open === false) {
+          tile.open = true;
+        }
+      }
+    }
+  }
 } //End of TTile
 
 export function createMines() {
   let mineCount = 0;
-  const colCount = gameLevel.Tiles.Col;
-  const rowCount = gameLevel.Tiles.Col;
+  let colCount = gameLevel.Tiles.Col;
+  let rowCount = gameLevel.Tiles.Col;
   do {
     const col = Math.floor(Math.random() * colCount);
     const row = Math.floor(Math.random() * rowCount);
@@ -60,7 +134,7 @@ export function createMines() {
       tile.isMine = true;
       mineCount++;
     }
-  } while (mineCount <= 5);
+  } while (mineCount < gameLevel.Mines);
 }
 
 export function createTiles(aSpcvs, aSPI) {
@@ -68,7 +142,7 @@ export function createTiles(aSpcvs, aSPI) {
   const glTiles = gameLevel.Tiles;
   const colCount = glTiles.Col;
   const rowCount = glTiles.Row;
-
+  tiles = [];
   for (let col = 0; col < colCount; col++) {
     const rows = [];
     for (let row = 0; row < rowCount; row++) {
@@ -84,8 +158,8 @@ export function createTiles(aSpcvs, aSPI) {
 export function drawTiles() {
   const colCount = gameLevel.Tiles.Col;
   const rowCount = gameLevel.Tiles.Row;
-  for (let col = 0; col < colCount.length; col++) {
-    const row = tiles[col];
+  for (let col = 0; col < colCount; col++) {
+    const rows = tiles[col];
     //const tile = tiles[i];
     for (let row = 0; row < rowCount; row++) {
       const tile = rows[row];
