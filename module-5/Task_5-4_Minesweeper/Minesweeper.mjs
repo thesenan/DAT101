@@ -3,6 +3,7 @@ import { TPoint } from "lib2d";
 import { TSpriteCanvas } from "libSprite";
 import { TGameBoard } from "./GameBoard.mjs";
 import { createTiles, drawTiles, createMines } from "./tile.js";
+import { TGameInfo } from "./gameMenu.js";
 
 //-----------------------------------------------------------------------------------------
 //----------- variables and object --------------------------------------------------------
@@ -25,7 +26,7 @@ export const SpriteInfoList = {
 
 const Difficulty = {
   Level_1: { Tiles: { Row: 10, Col: 10 }, Mines: 10, caption: "Level 1" },
-  Level_2: { Tiles: { Row: 15, Col: 15 }, Mines: 20, caption: "Level 2" },
+  Level_2: { Tiles: { Row: 15, Col: 15 }, Mines: 25, caption: "Level 2" },
   Level_3: { Tiles: { Row: 20, Col: 30 }, Mines: 99, caption: "Level 3" },
 };
 
@@ -34,7 +35,7 @@ const cvs = document.getElementById("cvs");
 const spcvs = new TSpriteCanvas(cvs);
 const selectDifficulty = document.getElementById("selectDifficulty");
 let gameBoard = null;
-
+let gameMenu = null;
 //-----------------------------------------------------------------------------------------
 //----------- functions -------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
@@ -52,6 +53,7 @@ export function newGame() {
   gameBoard = new TGameBoard(spcvs, SpriteInfoList.Board, new TPoint(0, 0));
   createTiles(spcvs, SpriteInfoList.ButtonTile);
   createMines();
+  gameMenu = new TGameInfo(spcvs, SpriteInfoList);
   //console.log("Test");
 }
 
@@ -59,6 +61,7 @@ function drawGame() {
   spcvs.clearCanvas();
   gameBoard.draw();
   drawTiles();
+  gameMenu.draw();
 }
 
 //-----------------------------------------------------------------------------------------

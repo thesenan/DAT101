@@ -88,18 +88,36 @@ export class TTile extends TSpriteButton {
   //Override function
 
   onMouseDown(aEvent) {
-    this.index = 1;
+    console.log(aEvent);
+    if (aEvent.button === 1 && this.index !== 3) {
+      this.index = 1;
+    } else if (aEvent.button === 2) {
+      //this.index = 3 - this.index;
+      if (this.index === 0) {
+        this.index = 3;
+      } else if (this.index === 3) {
+        this.index = 0;
+      }
+    }
     super.onMouseDown(aEvent);
   }
 
   onMouseUp(aEvent) {
+    //super.onMouseUp(aEvent);
+    if (aEvent.button === 2 || this.index === 3) {
+      return;
+    }
     this.open = true;
     super.onMouseUp(aEvent);
   }
 
   onMouseLeave(aEvent) {
-    if (this.open === false) {
-      this.index = 0;
+    if (aEvent.button === 2) {
+      return;
+    } else if (aEvent.button === 1) {
+      if (this.open === false) {
+        this.index = 0;
+      }
     }
     super.onMouseLeave(aEvent);
   }
