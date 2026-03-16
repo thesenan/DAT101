@@ -25,8 +25,8 @@ export const SpriteInfoList = {
 };
 
 const Difficulty = {
-  Level_1: { Tiles: { Row: 10, Col: 10 }, Mines: 10, caption: "Level 1" },
-  Level_2: { Tiles: { Row: 15, Col: 15 }, Mines: 25, caption: "Level 2" },
+  Level_1: { Tiles: { Row: 10, Col: 10 }, Mines: 15, caption: "Level 1" },
+  Level_2: { Tiles: { Row: 15, Col: 15 }, Mines: 40, caption: "Level 2" },
   Level_3: { Tiles: { Row: 20, Col: 30 }, Mines: 99, caption: "Level 3" },
 };
 
@@ -35,7 +35,8 @@ const cvs = document.getElementById("cvs");
 const spcvs = new TSpriteCanvas(cvs);
 const selectDifficulty = document.getElementById("selectDifficulty");
 let gameBoard = null;
-let gameMenu = null;
+export let gameMenu = null;
+
 //-----------------------------------------------------------------------------------------
 //----------- functions -------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------

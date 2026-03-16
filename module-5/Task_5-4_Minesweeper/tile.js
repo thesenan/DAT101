@@ -1,11 +1,34 @@
 "use strict";
 import { TSpriteButton } from "libSprite";
 import { TPoint } from "lib2d";
-import { gameLevel } from "./Minesweeper.mjs";
+import { gameLevel, gameMenu } from "./Minesweeper.mjs";
 
 const MineInfoColors = ["blue", "green", "red", "darkblue", "brown", "cyan", "black", "grey"];
 let tiles = [];
 let ctx = document.getElementById("cvs").getContext("2d");
+let gameOver = false; 
+let tilesRemaining = 0;
+
+function setGameOver() {
+  gameOver = true;
+  gameMenu.setSmileyIndex(2);
+  gameMenu.stopTimer();
+  for (let colIndex = 0; colIndex < gameLevel.Tiles.Col; colIndex++) {
+    const cols = tiles[colIndex];
+    for (let rowIndex = 0; rowIndex < gameLevel.Tiles.Row; rowIndex++) {
+      const tile = cols[rowIndex];
+      if (tile.isMine) {
+        if (tile.index === 3) {
+          tile.index = 7;
+        } else {
+          tile.index = 5;
+        }
+      } else if (tile.index === 3) {
+        tile.index = 6;
+      }
+    }
+  }
+}
 
 export class TTile extends TSpriteButton {
   #mine;
@@ -89,29 +112,52 @@ export class TTile extends TSpriteButton {
 
   onMouseDown(aEvent) {
     console.log(aEvent);
-    if (aEvent.button === 1 && this.index !== 3) {
+    if(gameOver){
+      return;
+    }
+    if (this.open) {
+      return;
+    }
+    if (aEvent.button === 0 && this.index !== 3) {
       this.index = 1;
+      gameMenu.setSmileyIndex(1);
     } else if (aEvent.button === 2) {
-      //this.index = 3 - this.index;
-      if (this.index === 0) {
+      this.index = 3 - this.index;
+      /*if (this.index === 0) {
         this.index = 3;
       } else if (this.index === 3) {
         this.index = 0;
+      }*/
+      if (this.index === 3) {
+        if (gameMenu.flagCount > 0) {
+          gameMenu.flagCount--;
+        } else {
+          this.index = 0;
+        }
+      } else {
+        gameMenu.flagCount++;
       }
     }
     super.onMouseDown(aEvent);
   }
 
   onMouseUp(aEvent) {
+    if(gameOver){
+      return;
+    }
     //super.onMouseUp(aEvent);
     if (aEvent.button === 2 || this.index === 3) {
       return;
     }
+    gameMenu.setSmileyIndex(0);
     this.open = true;
     super.onMouseUp(aEvent);
   }
 
   onMouseLeave(aEvent) {
+    if(gameOver){
+      return;
+    }
     if (aEvent.button === 2) {
       return;
     } else if (aEvent.button === 1) {
@@ -121,12 +167,35 @@ export class TTile extends TSpriteButton {
     }
     super.onMouseLeave(aEvent);
   }
+  
+  onMouseMove(aEvent){
+    if(this.open || gameOver){
+      return;
+    }
+    super.onMouseMove(aEvent);
+  }
 
   set open(_aValue) {
+    if(this.index === 3){
+      return;
+    }
     if (this.isMine) {
-      this.index = 5;
+      setGameOver();
+      this.index = 4;
+      //gameMenu.setSmileyIndex(2);
+      //Game Over!
+      return;
     } else {
       this.index = 2;
+      // Here the tile is opened, test if tileRemaining is equal to mines in game!
+      // Give smiley sunglasses
+      tilesRemaining--;
+      if(tilesRemaining <= gameLevel.Mines){
+        gameOver = true;
+        gameMenu.setSmileyIndex(4);
+        gameMenu.stopTimer();
+      }
+      
     }
     if (this.mineInfo === 0) {
       this.#getNeighbors();
@@ -143,7 +212,7 @@ export class TTile extends TSpriteButton {
 export function createMines() {
   let mineCount = 0;
   let colCount = gameLevel.Tiles.Col;
-  let rowCount = gameLevel.Tiles.Col;
+  let rowCount = gameLevel.Tiles.Row;
   do {
     const col = Math.floor(Math.random() * colCount);
     const row = Math.floor(Math.random() * rowCount);
@@ -160,13 +229,16 @@ export function createTiles(aSpcvs, aSPI) {
   const glTiles = gameLevel.Tiles;
   const colCount = glTiles.Col;
   const rowCount = glTiles.Row;
+  gameOver = false;
   tiles = [];
+  tilesRemaining = 0;
   for (let col = 0; col < colCount; col++) {
     const rows = [];
     for (let row = 0; row < rowCount; row++) {
       const newTile = new TTile(aSpcvs, aSPI, col, row);
       //tiles.push(newTile);
       rows.push(newTile);
+      tilesRemaining++;
     }
     tiles.push(rows);
   }

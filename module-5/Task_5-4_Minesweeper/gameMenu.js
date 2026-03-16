@@ -21,8 +21,34 @@ export class TGameInfo {
     this.#rightNumber.justify = ESpriteNumberJustifyType.Right;
     this.#rightNumber.digits = 3;
     pos.x = aSpcvs.width / 2 - aSPI.ButtonSmiley.width / 2;
-    this.#smiley = new TSpriteButton(aSpcvs, aSPI.ButtonSmiley, 270 - 41, pos.y);
+    this.#smiley = new TSpriteButton(aSpcvs, aSPI.ButtonSmiley, pos.x, pos.y);
     this.#hnbTimer = setInterval(this.onTime.bind(this), 1000);
+    this.#smiley.addEventListener("mousedown", this.#smileyMouseDown.bind(this));
+    this.#smiley.addEventListener("mouseup", this.#smileyMouseUp.bind(this));
+  }
+
+  #smileyMouseDown() {
+    this.#smiley.index++;
+  }
+  #smileyMouseUp() {
+    this.#smiley.index--;
+    newGame();
+  }
+
+  get flagCount() {
+    return this.#leftNumber.value;
+  }
+  set flagCount(aValue) {
+    this.#leftNumber.value = aValue;
+  }
+
+  stopTimer() {
+    clearInterval(this.#hnbTimer);
+    this.#hnbTimer = null;
+  }
+
+  setSmileyIndex(aIndex) {
+    this.#smiley.index = aIndex;
   }
 
   draw() {
@@ -31,7 +57,7 @@ export class TGameInfo {
     this.#smiley.draw();
   }
 
-  onTime(){
+  onTime() {
     this.#rightNumber.value++;
   }
 }
