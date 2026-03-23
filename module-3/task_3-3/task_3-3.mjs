@@ -112,6 +112,7 @@ printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+// Function that takes inn an amount and a VAT type and calculates the price without VAT and prints it out
 
 function vatCalc(aAmount, aType) {
   const amount = aAmount;
@@ -151,32 +152,128 @@ printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+// Function that takes inn three values, one of which is null, and calculates the missing value based on the formula: Speed = Distance / Time
 
-function SpdCalc(aSpeed = 0, aDistance = 0, aTime = 0) {
-  const speedCalc = aDistance / aTime;
-  const speed = aSpeed;
-  // if (aSpeed === 0) {
-  //}
+function SpdCalc(aSpeed, aDistance, aTime) {
+  // Count how many values are missing
+  let missingCount = 0;
+  if (aSpeed === null) missingCount++;
+  if (aDistance === null) missingCount++;
+  if (aTime === null) missingCount++;
+
+  // Ensure exactly one value is missing
+  if (missingCount !== 1) {
+    printOut("<br>Error: Exactly one value must be missing!<br>");
+    return NaN;
+  }
+
+  // Missing SPEED
+  if (aSpeed === null) {
+    if (!aTime || aTime === 0 || !aDistance) {
+      printOut("<br>Error: Time or Distance cannot be zero or null when calculating speed!<br>");
+      return NaN;
+    }
+    const calcSpeed = aDistance / aTime;
+    printOut(`<br>Calculated Speed = ${calcSpeed.toFixed(2)} km/h<br>`);
+    return calcSpeed;
+  }
+
+  // Missing TIME
+  if (aTime === null) {
+    if (!aSpeed || aSpeed === 0 || !aDistance) {
+      printOut("<br>Error: Speed or Distance cannot be zero or null when calculating time!<br>");
+      return NaN;
+    }
+    const calcTime = aDistance / aSpeed;
+    printOut(`<br>Calculated Time = ${calcTime.toFixed(2)} hours<br>`);
+    return calcTime;
+  }
+
+  // Missing DISTANCE
+  if (aDistance === null) {
+    if (!aSpeed || !aTime) {
+      printOut("<br>Error: Speed or Time cannot be null when calculating distance!<br>");
+      return NaN;
+    }
+    const calcDistance = aSpeed * aTime;
+    printOut(`<br>Calculated Distance = ${calcDistance.toFixed(2)} km<br>`);
+    return calcDistance;
+  }
 }
-SpdCalc(60);
+
+SpdCalc(null, 100, 20); // Calculates speed
+SpdCalc(5, null, 10); // Calculates distance
+SpdCalc(5, 100, null); // Calculates time
+SpdCalc(null, null, 10); // Error: More than one value missing
 
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+// Function that takes inn a string, a max size, a character to fill in with and a boolean to determine if the character should be added at the end or the beginning of the string. The function should then adjust the string to fit the max size by adding the character at the correct position until the string is long enough.
+
+function StringAdjust(aText, aMaxSize, aChar, aInsertAtEnd) {
+  if (aText.length >= aMaxSize) {
+    printOut(`<br>Adjusted String: "${aText}"<br>`);
+    return aText;
+  }
+
+  let newText = aText;
+
+  while (newText.length < aMaxSize) {
+    if (aInsertAtEnd === true) {
+      newText = newText + aChar;
+    } else {
+      newText = aChar + newText;
+    }
+  }
+  printOut(`<br>Adjusted String: "${newText}"<br>`);
+  return newText;
+}
+StringAdjust("Hello", 10, "*", true);
+StringAdjust("Hello", 10, "*", false);
+StringAdjust("HelloWorld", 5, "*", true);
+
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+// Function that tests the formula: 1 + 2 + ... + n = n * (n + 1) / 2 for the first 200 lines and prints out if the test was successful or not
+
+function MathTest(aLines) {
+  let currentNumber = 1;
+
+  for (let line = 1; line <= aLines; line++) {
+    let leftSum = 0;
+    let rightSum = 0;
+
+    for (let i = 0; i < line + 1; i++) {
+      leftSum += currentNumber;
+      currentNumber++;
+    }
+
+    for (let i = 0; i < line; i++) {
+      rightSum += currentNumber;
+      currentNumber++;
+    }
+
+    if (leftSum !== rightSum) {
+      console.log(`Test failed at line ${line}: Left = ${leftSum}, Right = ${rightSum}`);
+      return;
+    }
+  }
+  printOut("<br>Maths fun!<br>");
+}
+
+MathTest(200);
+
 printOut(newLine);
 
 /* Task 10*/
 printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+// Function that takes inn a number and calculates the factorial of that number and prints it out
 
-//Takes inn a number and calculates the corresponding factorial of said number
 function factorial(aNumber = 0) {
   let result = 1;
   for (let i = 1; i <= aNumber; i++) {
@@ -185,6 +282,6 @@ function factorial(aNumber = 0) {
   printOut(`${aNumber}! = ${result}`);
 }
 
-factorial(5);
+factorial(8);
 
 printOut(newLine);
