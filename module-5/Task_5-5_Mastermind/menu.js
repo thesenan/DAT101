@@ -26,8 +26,12 @@ export class TMenu {
     this.#newGameBtn.onClick = this.#newGameBtnOnClick.bind(this);
     this.#checkAnswerBtn.onClick = this.#checkAnswerBtnOnClick.bind(this);
   }
+  setCheckAnserDisabled(aDisabled){
+    this.#checkAnswerBtn.disabled = aDisabled;
+  }
+  #checkAnswerBtnOnClick() {
 
-  #checkAnswerBtnOnClick() {}
+  }
 
   #newGameBtnOnClick() {
     newGame();

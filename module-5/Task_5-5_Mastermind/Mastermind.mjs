@@ -29,7 +29,7 @@
 // We are bringing in the TSpriteCanvas from our custom libSprite engine.
 // This is the powerhouse that handles all our drawing and event listening! 🚂
 
-import { TSpriteCanvas } from "libSprite";
+import { TSpriteCanvas, TSprite } from "libSprite";
 import { TMenu } from "./menu.js";
 import { TColorPicker } from "./colorPicker.js";
 import { MastermindBoard } from "./MastermindBoard.mjs";
@@ -56,8 +56,7 @@ const cvs = document.getElementById("cvs");
 export const spcvs = new TSpriteCanvas(cvs);
 export let menu = null;
 export let colorPickers = [];
-
- 
+export let computerAnswers = [];
 
 // --------------------------------------------------------------------------------------------------------------------
 // ⚙️ 3. Game Functions
@@ -73,11 +72,25 @@ export function newGame() {
   // TODO: Create the draggable color picker pegs for the menu.
   menu = new TMenu();
   createColorPickers();
+  createComputerAnswers();
 }
 
-function createColorPickers(){
+function createComputerAnswers() {
+  const colors = SpriteInfoList.ColorPicker.count;
+  for (let i = 0; i < 4; i++) {
+    const colorIndex = Math.floor(Math.random() * colors);
+    const x = MastermindBoard.ComputerAnswer[i].x;
+    const y = MastermindBoard.ComputerAnswer[i].y;
+    const spColor = new TSprite(spcvs, SpriteInfoList.ColorPicker, x, y);
+    spColor.index = colorIndex;
+    computerAnswers.push(spColor);
+
+  }
+}
+
+function createColorPickers() {
   const keys = Object.keys(MastermindBoard.ColorPicker);
-  for(let i = 0; i < keys.length; i++){
+  for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const pos = MastermindBoard.ColorPicker[key];
     const newColorPicker = new TColorPicker(pos);
@@ -86,8 +99,8 @@ function createColorPickers(){
   }
 }
 
-function drawColorPickers(){
-  for(let i = 0; i < colorPickers.length; i++){
+function drawColorPickers() {
+  for (let i = 0; i < colorPickers.length; i++) {
     const colorPicker = colorPickers[i];
     colorPicker.draw();
   }
@@ -96,9 +109,7 @@ function drawColorPickers(){
 function drawGame() {
   // 🧽 Wipe the canvas clean every single frame before drawing the new one.
   spcvs.clearCanvas();
-  menu.drawBackground();
-  menu.draw();
-  drawColorPickers();
+  
 
   // 🎨 The Painter's Algorithm!
   // Draw your game objects here. Remember: the first thing you draw goes in the BACK.
@@ -106,9 +117,18 @@ function drawGame() {
   // Example order: Background -> Computer's Answer -> Player's Pegs -> Menu GUI.
 
   // TODO: Loop through your arrays and call .draw() on your sprites!
-
+  menu.drawBackground();
+  drawComputerAnswers();
+  menu.draw();
+  drawColorPickers();
 }
 
+function drawComputerAnswers(){
+  for(let i = 0; i < computerAnswers.length; i++){
+    const spColor = computerAnswers[i];
+    spColor.draw();
+  }
+}
 // --------------------------------------------------------------------------------------------------------------------
 // 🕹️ 4. Initialization & Main Code
 // --------------------------------------------------------------------------------------------------------------------
@@ -122,7 +142,6 @@ function loadGame() {
   spcvs.updateBoundsRect();
   newGame();
   spcvs.onDraw = drawGame;
-
 }
 
 // 🚀 Kickoff! Load the image and attach our screen resize listener.
