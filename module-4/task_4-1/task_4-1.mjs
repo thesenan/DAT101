@@ -10,16 +10,16 @@ const AccountTypes = {
 
 // This regards part 5! You can find this on gitHub.
 const CurrencyTypes = {
-  NOK: { value: 1.0000, name: "Norske kroner", denomination: "kr" },
+  NOK: { value: 1.0, name: "Norske kroner", denomination: "kr" },
   EUR: { value: 0.0985, name: "Europeiske euro", denomination: "€" },
   USD: { value: 0.1091, name: "United States dollar", denomination: "$" },
   GBP: { value: 0.0847, name: "Pound sterling", denomination: "£" },
   INR: { value: 7.8309, name: "Indiske rupee", denomination: "₹" },
   AUD: { value: 0.1581, name: "Australske dollar", denomination: "A$" },
   PHP: { value: 6.5189, name: "Filippinske peso", denomination: "₱" },
-  SEK: { value: 1.0580, name: "Svenske kroner", denomination: "kr" },
+  SEK: { value: 1.058, name: "Svenske kroner", denomination: "kr" },
   CAD: { value: 0.1435, name: "Canadiske dollar", denomination: "C$" },
-  THB: { value: 3.3289, name: "Thai baht", denomination: "฿" }
+  THB: { value: 3.3289, name: "Thai baht", denomination: "฿" },
 };
 
 class TBankAccount {
@@ -33,8 +33,8 @@ class TBankAccount {
     this.#currency = CurrencyTypes.NOK;
   }
 
-  #currencyConvert(aType){
-    return CurrencyTypes.NOK.value / this.#currency.value * aType.value;
+  #currencyConvert(aType) {
+    return (CurrencyTypes.NOK.value / this.#currency.value) * aType.value;
   }
 
   toString() {
@@ -70,7 +70,7 @@ class TBankAccount {
         return;
       case AccountTypes.Saving:
         this.#withdrawCount++;
-        if(this.#withdrawCount > 3){
+        if (this.#withdrawCount > 3) {
           printOut("You can not withdraw from " + this.#type + " more than three times");
           return;
         }
@@ -84,8 +84,8 @@ class TBankAccount {
     printOut("Withdraw of " + aAmount + " " + name + ", new balance is " + this.#balance.toFixed(2) + den);
   }
 
-  setCurrencyType(aType){
-    if(this.#currency === aType){
+  setCurrencyType(aType) {
+    if (this.#currency === aType) {
       return;
     }
     printOut("The currency has changed from " + this.#currency.name + " to " + aType.name);
