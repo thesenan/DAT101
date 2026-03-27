@@ -187,7 +187,6 @@ const txtMovieRate = document.getElementById("txtMovieRate");
 const cmbAddMovie = document.getElementById("cmbAddMovie");
 const tblMovies = document.getElementById("tblMovies");
 
-// Fill genre dropdown from MovieGenre array
 for (let i = 0; i < MovieGenre.length; i++) {
   let opt = document.createElement("option");
   opt.value = MovieGenre[i];
@@ -201,19 +200,13 @@ function cmbAddMovieClick() {
   let director = txtMovieDirector.value.trim();
   let rate = txtMovieRate.value;
 
-  // Basic check
   if (title === "" || director === "" || rate === "") {
     alert("Please fill out all movie fields.");
     return;
   }
 
-  // Insert row at the end
   let newRow = tblMovies.insertRow(-1);
-
-  // Count rows except the header row
   let movieNumber = tblMovies.rows.length - 1;
-
-  // Create cells
   let cellNr = newRow.insertCell(0);
   let cellTitle = newRow.insertCell(1);
   let cellGenre = newRow.insertCell(2);
