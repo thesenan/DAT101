@@ -8,6 +8,7 @@ const AccountTypes = {
   Pensjon: "Pensjonskonto",
 };
 
+// This regards part 5! You can find this on gitHub.
 const CurrencyTypes = {
   NOK: { value: 1.0000, name: "Norske kroner", denomination: "kr" },
   EUR: { value: 0.0985, name: "Europeiske euro", denomination: "€" },
@@ -97,15 +98,18 @@ class TBankAccount {
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+// Print all these types on a single comma-separated line:
+// Get all object values:
 const accountTypeValues = Object.values(AccountTypes);
+// Join them in a single string with commas:
 const part1Text = accountTypeValues.join(", ");
-
+// Print the result:
 printOut(part1Text);
-
 printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+
 const myAccount = new TBankAccount(AccountTypes.Normal);
 myAccount.setType(AccountTypes.Saving);
 
@@ -136,7 +140,6 @@ printOut(newLine);
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 myAccount.deposit(150);
-
 printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
@@ -144,7 +147,6 @@ printOut("--- Part 6 -----------------------------------------------------------
 myAccount.setCurrencyType(CurrencyTypes.SEK);
 myAccount.setCurrencyType(CurrencyTypes.USD);
 myAccount.setCurrencyType(CurrencyTypes.NOK);
-
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
@@ -154,5 +156,4 @@ myAccount.withdraw(10, CurrencyTypes.GBP);
 myAccount.setCurrencyType(CurrencyTypes.CAD);
 myAccount.setCurrencyType(CurrencyTypes.INR);
 myAccount.withdraw(150.1585, CurrencyTypes.SEK);
-
 printOut(newLine);
