@@ -9,7 +9,7 @@ import { TMenu } from "./menu.js";
 
 //--------------- Objects and Variables ----------------------------------//
 const chkMuteSound = document.getElementById("chkMuteSound");
-const rbDayNight = document.getElementsByName("rbDayNight");
+export const rbDayNight = document.getElementsByName("rbDayNight");
 const cvs = document.getElementById("cvs");
 const spcvs = new TSpriteCanvas(cvs);
 
@@ -39,6 +39,7 @@ let baits = [];
 export const menu = new TMenu(spcvs, SpriteInfoList);
 let obstaclePassed = false;
 let timeOutId = [0, 1];
+export let muteSoundCheck = chkMuteSound.checked;
 
 //--------------- Functions ----------------------------------------------//
 export function clearGame() {
@@ -152,10 +153,32 @@ function onKeyDown(aEvent) {
 
 function setSoundOnOff() {
   // Mute or unmute the game sound based on checkbox
-  if (chkMuteSound) {
-  } else if (!chkMuteSound) {
+  /*if(chkMuteSound.checked){
+    muteSoundCheck = true;
+    console.log("muted");
+  }else{
+    muteSoundCheck = false;
+    console.log("not muted");
+  }
+  console.log(chkMuteSound.checked);*/
+  muteSoundCheck = chkMuteSound.checked;
+  if (chkMuteSound.checked) {
+    menu.stopSound();
+  } else {
+    menu.playSound();
   }
 } // end of setSoundOnOff
+
+function changePipes() {
+  for (let i = 0; i < obstacles.length; i++) {
+    obstacles[i].pipeChangeDayNight();
+  }
+}
+export function gameEnd() {
+  menu.stopSound();
+  menu.gameOverMenu();
+  menu.highScore();
+}
 
 function setDayNight(aEvent) {
   // Set day or night mode based on radio buttons
@@ -163,6 +186,7 @@ function setDayNight(aEvent) {
   // e.g., isDayMode = (aEvent.target.value == 1);
   background.changeBackground(aEvent.target.value);
   console.log(`Day/Night mode changed: ${aEvent.target.value}`);
+  changePipes();
 } // end of setDayNight
 
 //--------------- Main Code ----------------------------------------------//

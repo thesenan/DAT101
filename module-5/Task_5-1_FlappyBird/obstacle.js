@@ -1,18 +1,19 @@
 "use strict";
 import { TSprite } from "libSprite";
-import { hero, EGameStatus, menu } from "./FlappyBird.mjs";
+import { hero, EGameStatus, menu, rbDayNight } from "./FlappyBird.mjs";
 //import { ground } from "./FlappyBird.mjs";
 
 const EasyFlyerGap = 150;
 const HardFlyerGap = 100;
 const MinimumProtrusion = 30;
 
-
-export class TObstacle{
+export class TObstacle {
   #spUp;
   #spDown;
   #spi;
-  constructor(aSpcvs, aSPI){
+  #dayNightCheck;
+
+  constructor(aSpcvs, aSPI) {
     const x = 600;
     this.#spi = aSPI;
     // Generate random gap height, based on difficulty settings
@@ -22,41 +23,56 @@ export class TObstacle{
     // Genrate random top position for upper obstacle
     let top = Math.ceil(Math.random() * (maxTop - minTop) + minTop);
     const minBottom = 400 - MinimumProtrusion; // Minimum bottom position for lower obstacle
-    let topWithGap = this.#spi.height + top + gap; // Initial position of bottom obstacle based on the height of the sprite, gap, and top 
-    if(topWithGap > minBottom){
+    let topWithGap = this.#spi.height + top + gap; // Initial position of bottom obstacle based on the height of the sprite, gap, and top
+    if (topWithGap > minBottom) {
       // The top with gap is too low, adjust top and keep the gap constant
       const adjustment = topWithGap - minBottom;
       top -= adjustment;
       topWithGap = this.#spi.height + top + gap; // Recalculate topWithGap after adjustment
     }
+    this.#dayNightCheck = rbDayNight[0].checked;
+    console.log(this.#dayNightCheck);
 
     this.#spDown = new TSprite(aSpcvs, aSPI, x, topWithGap);
     this.#spDown.index = 2;
     this.#spUp = new TSprite(aSpcvs, aSPI, x, top);
     this.#spUp.index = 3;
+    if (this.#dayNightCheck === false) {
+      this.#spDown.index = 0;
+      this.#spUp.index = 1;
+    }
   }
 
   // Properties
-  get x(){
+  get x() {
     return this.#spDown.x;
   }
 
-  get width(){
+  get width() {
     return this.#spDown.width;
   }
-  
-  draw(){
+  pipeChangeDayNight() {
+    this.#dayNightCheck = rbDayNight[0].checked;
+    if (this.#dayNightCheck === false) {
+      this.#spDown.index = 0;
+      this.#spUp.index = 1;
+    } else {
+      this.#spDown.index = 2;
+      this.#spUp.index = 3;
+    }
+  }
+
+  draw() {
     this.#spDown.draw();
     this.#spUp.draw();
   }
 
-  
-  animate(){
+  animate() {
     this.#spDown.x--;
     this.#spUp.x--;
-    let hasCollided = (hero.hasCollided(this.#spDown)) || (hero.hasCollided(this.#spUp)) /*|| (hero.hasCollided(ground))*/;
+    let hasCollided = hero.hasCollided(this.#spDown) || hero.hasCollided(this.#spUp); /*|| (hero.hasCollided(ground))*/
 
-    if(hasCollided){
+    if (hasCollided) {
       console.log("crash");
       EGameStatus.state = EGameStatus.heroIsDead;
       hero.animationSpeed = 0;
@@ -65,5 +81,4 @@ export class TObstacle{
       hero.dead();
     }
   }
-
-}// End of class TObstacle
+} // End of class TObstacle

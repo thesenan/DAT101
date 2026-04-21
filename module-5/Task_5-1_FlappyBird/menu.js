@@ -1,6 +1,6 @@
 "use strict";
 import { TSprite, TSpriteButton, TSpriteNumber } from "libSprite";
-import { EGameStatus, startGame, clearGame, hero } from "./FlappyBird.mjs";
+import { EGameStatus, startGame, clearGame, hero, muteSoundCheck } from "./FlappyBird.mjs";
 import { TSoundFile } from "libSound";
 
 const fnCountDown = "./Media/countDown.mp3";
@@ -31,7 +31,7 @@ export class TMenu {
     this.#spGameOver.hidden = true;
     this.#spGameScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 10, 10, undefined, 0);
     this.#spGameScore.alpha = 0.5;
-    this.#spHighScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 350, 275);
+    this.#spHighScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 350, 275, undefined, 0);
     this.#spHighScore.value = 0;
     this.#spHighScore.visible = false;
     this.#spMedal = new TSprite(aSpcvs, aSPI.medal, 200, 245);
@@ -65,7 +65,9 @@ export class TMenu {
       this.#spGetReady.hidden = true;
       this.#spCountDown.visible = false;
       this.#sfRunning = new TSoundFile(fnRunning);
-      this.#sfRunning.play();
+      if (!muteSoundCheck) {
+        this.#sfRunning.play();
+      }
       startGame();
     }
   }
@@ -75,18 +77,19 @@ export class TMenu {
       this.#spHighScore.value = this.#spGameScore.value;
     }
     this.#spHighScore.visible = true;
+    console.log(this.#spHighScore.value);
   }
 
   incGameScore(aScore) {
     this.#spGameScore.value += aScore;
   }
-  
+
   gameOverMenu() {
     this.#spGameOver.hidden = false;
     this.#spScoreBoard.hidden = false;
     this.#spGameScore.x = 350;
     this.#spGameScore.y = 235;
-    
+
     switch (true) {
       case this.#spGameScore.value >= 50:
         this.#spMedal.index = 2;
@@ -94,9 +97,9 @@ export class TMenu {
       case this.#spGameScore.value >= 30:
         this.#spMedal.index = 1;
         break;
-        case this.#spGameScore.value >=10:
-            this.#spMedal.index = 3;
-            break;
+      case this.#spGameScore.value >= 10:
+        this.#spMedal.index = 3;
+        break;
     }
     this.#spMedal.hidden = false;
     this.#spPlayBtn.hidden = false;
@@ -107,18 +110,21 @@ export class TMenu {
     this.#sfRunning.stop();
   }
 
-  resetGame(){
+  playSound() {
+    this.#sfRunning.play();
+  }
+
+  resetGame() {
     this.#spPlayBtn.hidden = true;
     this.#spGameOver.hidden = true;
     this.#spScoreBoard.hidden = true;
     this.#spMedal.hidden = true;
-    this.#spGameScore.x=10;
-    this.#spGameScore.y=10;
+    this.#spGameScore.x = 10;
+    this.#spGameScore.y = 10;
     this.#spGameScore.value = 0;
     this.#spHighScore.visible = false;
     hero.resetHero();
     clearGame();
-
   }
 
   spPlayBtnClick() {
@@ -131,7 +137,9 @@ export class TMenu {
     this.#spCountDown.visible = true;
     this.#spCountDown.value = 3;
     this.#sfCountDown = new TSoundFile(fnCountDown);
-    this.#sfCountDown.play();
+    if (!muteSoundCheck) {
+      this.#sfCountDown.play();
+    }
     setTimeout(this.countDown.bind(this), 1000);
   }
 }
